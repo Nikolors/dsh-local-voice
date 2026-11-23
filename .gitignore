@@ -1,0 +1,7 @@
+﻿*.log
+*.pid
+*.wav
+*.gguf
+__pycache__/
+.venv/
+voice-target.txt
