@@ -1,0 +1,10 @@
+- insert:
+    - id: voice-server-lifecycle
+      name: '@local/voice-server-lifecycle'
+      config:
+        port: 8895
+        pythonw: 'C:\Users\ipdnv\dsh-voice\venv\Scripts\pythonw.exe'
+        script: 'C:\work\workspace\tools\qwen_tts_server.py'
+        talker: 'qwen-talker-1.7b-base-Q8_0.gguf'
+        refWav: 'C:\work\workspace\tools\voices\lera-sample.wav'
+        launcher: 'C:\work\workspace\tools\voice-stack.cmd'
