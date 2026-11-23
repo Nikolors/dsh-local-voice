@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Voice server lifecycle">
+  <defs>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5ad1c8"/>
+      <stop offset="1" stop-color="#3a8fd6"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#12202b"/>
+  <rect x="2.75" y="2.75" width="58.5" height="58.5" rx="13.25" fill="none" stroke="url(#wave)" stroke-width="1.5"/>
+  <rect x="26" y="12" width="12" height="22" rx="6" fill="url(#wave)"/>
+  <path d="M20 30a12 12 0 0 0 24 0" fill="none" stroke="url(#wave)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 42v8" stroke="url(#wave)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M24 50h16" stroke="url(#wave)" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="46" cy="18" r="4" fill="#5ad1c8"/>
+</svg>
