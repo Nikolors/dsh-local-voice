@@ -1,5 +1,10 @@
 # dsh-local-voice — локальная озвучка для DeepSeek Harness
 
+![Platform](https://img.shields.io/badge/platform-Windows-0078d4)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Voice](https://img.shields.io/badge/voice-Qwen3--TTS-orange)
+
+
 Локальный голос для DSH: клонирование голоса по образцу, русская речь, без облака
 и без оплаты за символы. Работает на видеокарте через движок
 [qwentts.cpp](https://github.com/timoncool/qwentts.cpp) (Qwen3-TTS, MIT).
