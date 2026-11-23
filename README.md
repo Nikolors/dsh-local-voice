@@ -97,3 +97,11 @@ python tools\voice_router.py               :: переключатель на 88
 `patches/dsh-tts-streaming/` — правка штатного плагина `@goodandready/dsh-tts`:
 он начинает говорить по мере поступления текста, а не после всего ответа.
 Инструкция и файл — внутри папки.
+**Ключевые слова / keywords:** DeepSeek Harness, DSH плагин, локальная озвучка,
+русский текст в речь, TTS без интернета, клонирование голоса по образцу, Qwen3-TTS,
+qwentts.cpp, OpenAI-совместимый TTS сервер, переключение локальный/облачный голос,
+потоковая озвучка, Windows, CUDA, NVIDIA.
+
+> **English:** a local Russian text-to-speech plugin for DeepSeek Harness (DSH) —
+> Qwen3-TTS voice cloning from a 24 kHz sample, an OpenAI-compatible TTS server,
+> chunked streaming, a runtime local↔cloud switcher and a lifecycle plugin.
