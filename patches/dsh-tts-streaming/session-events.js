@@ -3,7 +3,6 @@ import { appendFileSync } from 'node:fs'
 
 const STREAM_LOG = process.env.DSH_TTS_STREAM_LOG || ''
 const note = (text) => {
-  if (!STREAM_LOG) return
   try {
     appendFileSync(STREAM_LOG, `${new Date().toISOString()} ${text}\n`, 'utf8')
   } catch {
@@ -16,6 +15,7 @@ export function registerSessionEvents(ctx, { live, cleanText, prepareSpeechTextB
   // 23.11: поток живой речи — копим текстовые дельты и говорим по предложениям.
   const streamBuf = new Map()
   const streamSpokenAt = new Map()
+  const streamSpokenPending = new Set()
 
   const speakStreamPiece = (sid, raw, cfg) => {
     note(`фраза в потоке: ${raw.length} симв.`)
@@ -34,6 +34,7 @@ export function registerSessionEvents(ctx, { live, cleanText, prepareSpeechTextB
         })
       }
       streamSpokenAt.set(sid, Date.now())
+      streamSpokenPending.add(sid)
       note(`озвучено кусков: ${pieces.length}`)
     }).catch((error) => { note(`ошибка подготовки: ${error && error.message}`) })
   }
@@ -58,7 +59,7 @@ export function registerSessionEvents(ctx, { live, cleanText, prepareSpeechTextB
       if (cut > 0) {
         const ready = text.slice(0, cut).trim()
         streamBuf.set(frame.attemptId, text.slice(cut))
-        if (ready.length >= 12) speakStreamPiece(sid, ready, cfg)
+        if (ready.length >= 2) speakStreamPiece(sid, ready, cfg)
       } else {
         streamBuf.set(frame.attemptId, text)
       }
@@ -67,7 +68,7 @@ export function registerSessionEvents(ctx, { live, cleanText, prepareSpeechTextB
     if (frame.type === 'end') {
       const rest = (streamBuf.get(frame.attemptId) || '').trim()
       streamBuf.delete(frame.attemptId)
-      if (rest.length >= 12) speakStreamPiece(sid, rest, cfg)
+      if (rest.length >= 2) speakStreamPiece(sid, rest, cfg)
     }
   }))
 
@@ -109,8 +110,11 @@ export function registerSessionEvents(ctx, { live, cleanText, prepareSpeechTextB
       // in sentence pieces; waiting for turn end means silence while the agent works.
       if (cfg.speakAsItGoes) {
         // Поток уже проговорил этот ответ — не повторяем его целиком.
-        const lastStream = streamSpokenAt.get(sid) || 0
-        if (Date.now() - lastStream < 60000) return
+        // Флаг снимается один раз: следующий ответ озвучивается как обычно.
+        if (streamSpokenPending.has(sid)) {
+          streamSpokenPending.delete(sid)
+          return
+        }
         prepareSpeechTextBound(text, cfg).then((ready) => {
           if (!ready) return
           const pieces = splitSentencesWithOffsets(ready, cfg.sentenceChars)
