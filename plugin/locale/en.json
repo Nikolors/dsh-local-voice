@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Voice server lifecycle",
+    "description": "Starts the local Qwen3-TTS voice server when the app opens and stops it when the app quits, so the voice lives and dies with the app.",
+    "detail": "docs/DETAIL.md"
+  }
+}
