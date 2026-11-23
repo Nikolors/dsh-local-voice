@@ -105,3 +105,4 @@ qwentts.cpp, OpenAI-совместимый TTS сервер, переключе�
 > **English:** a local Russian text-to-speech plugin for DeepSeek Harness (DSH) —
 > Qwen3-TTS voice cloning from a 24 kHz sample, an OpenAI-compatible TTS server,
 > chunked streaming, a runtime local↔cloud switcher and a lifecycle plugin.
+Плагин опубликован в npm: [`dsh-local-voice`](https://www.npmjs.com/package/dsh-local-voice) — ставится из маркета плагинов внутри приложения.
